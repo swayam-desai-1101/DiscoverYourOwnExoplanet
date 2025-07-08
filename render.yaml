@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ExoplanetDetection
+    name: ExoplanetDetectionTool
     env: docker
     repo: https://github.com/040532/ExoplanetDiscovery
     branch: main
