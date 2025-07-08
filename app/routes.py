@@ -10,10 +10,11 @@ import uuid
 
 main = Blueprint('main', __name__)
 
-MODELS = {
-    "cnn": tf.keras.models.load_model("models/cnn_model.h5"),
-    "cnn_lstm": tf.keras.models.load_model("models/cnn_lstm_model.h5")
-}
+# Lazy Loader function
+
+def load_model(model_choice):
+    model_path=os.path.join("models", f"{model_choice}_model.h5")
+    return tf.keras.models.load_model(model_path)
 
 temp_model = None
 @main.route("/", methods=["GET", "POST"])
@@ -25,7 +26,7 @@ def index():
         files = request.files.getlist("file") # allows multiple files
         model_choice = request.form.get("model")
         selected_model = model_choice
-        model = MODELS.get(selected_model)
+        model = load_model(selected_model)
         temp_model = model
         if model is None:
             return render_template("index.html", result="Error: Invalid model selection.", results=[], plots=[])
