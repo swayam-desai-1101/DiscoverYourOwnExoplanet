@@ -14,9 +14,11 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY app/ app/
-COPY utils/ utils/
-COPY models/ models/
+# Copy the app code
+COPY app/ ./app/
+
+# Copy the models directory into the image
+COPY models/ ./models/
 COPY wsgi.py .
 
 
