@@ -2,7 +2,7 @@ services:
   - type: web
     name: ExoplanetDetectionTool
     env: docker
-    repo: https://github.com/040532/ExoplanetDiscovery
+    repo: https://github.com/swayam-desai-1101/DiscoverYourOwnExoplanet
     branch: main
     plan: free
     autoDeploy: true
