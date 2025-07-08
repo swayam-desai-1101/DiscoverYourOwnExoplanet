@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libgl1-mesa-glx \
     && rm -rf /var/lib/apt/lists/*
-
+    
 # Set work directory
 WORKDIR /app
 
@@ -14,11 +14,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-# Copy the app code
-COPY app/ ./app/
-
-# Copy the models directory into the image
-COPY models/ ./models/
+COPY app/ app/
 COPY wsgi.py .
 
 
