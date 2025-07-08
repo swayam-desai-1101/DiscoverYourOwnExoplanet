@@ -13,7 +13,17 @@ main = Blueprint('main', __name__)
 # Lazy Loader function
 
 def load_model(model_choice):
-    model_path=os.path.join("models", f"{model_choice}_model.h5")
+    model_path = f"models/{model_choice}_model.h5"
+
+    if not tf.io.gfile.exists(model_path):
+        raise FileNotFoundError(f"Model file not found at: {model_path}")
+
+    if tf.io.gfile.stat(model_path).length < 100_000:
+        raise ValueError(
+            f"Model file at {model_path} is too small to be a real model. "
+            "Did you forget to run `git lfs pull`?"
+        )
+
     return tf.keras.models.load_model(model_path)
 
 temp_model = None
